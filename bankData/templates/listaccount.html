@@ -1,0 +1,234 @@
+{% block body %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <style>
+        body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #343a40;
+    color: #fff;
+    padding-top: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px 20px;
+    border-bottom: 1px solid #4f5963;
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #4f5963;
+}
+
+.submenu {
+    display: none;
+    padding-left: 20px;
+}
+
+.submenu li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+}
+
+.submenu li a:hover {
+    background-color: #555;
+}
+
+.main-content {
+    /* margin-top: 50px; */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 93vh;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    margin-top: 10px;
+    width: 150%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+
+form {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-group input[type="text"], .form-group input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.btn-primary {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+.heading {
+    position: absolute;
+    top: 0;
+}
+.heading h1{
+    /* margin-top: 10px; */
+    text-align: center;
+    /* margin-bottom: 50px; */
+    font-size: 40px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <ul>
+	    <li><a href="/admin_panel">Dashboard</a></li>
+            <li><a href="/listaccounts">Accounts List</a></li>
+            <li class="has-submenu" id="submenu-trigger"><a href="#">Withdraw/Deposit</a>
+                <ul class="submenu">
+                    <li><a href="/withdraw">Withdraw</a></li>
+                    <li><a href="/deposit">Deposit</a></li>
+                </ul>
+            </li>
+            <li><a href="/delete">Delete Account</a></li>
+            <li><a href="/update">Update Account</a></li>
+            <li style="align-items: center;">
+                <form action="/logout" method="GET">
+                    {% csrf_token %}
+                    <button type="submit" style="padding: 10px 10px; width: 80px;">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+    <div class="main-content" style="background-image: url('/static/bg-04.jpg'); background-size: cover; background-position: center; overflow: hidden; background-repeat: repeat;">
+        <div class="heading"><h1>Total Accounts</h1></div>
+        <center>
+        <table>
+            <thead>
+                <tr>
+                    <th>Serial no.</th>
+                    <th>Customer Id</th>
+                    <th>Account No</th>
+                    <th>Name</th>
+                    <th>Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% load static %} {% for p in customer %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{ p.id }}</td>
+                    <td>{{ p.accountno }}</td>
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.balance }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </center>
+      
+       
+    </div>
+    
+    <script>
+    
+
+    document.getElementById("submenu-trigger").addEventListener("click", function() {
+    var submenu = this.querySelector(".submenu");
+    if (submenu.style.display === "block") {
+        submenu.style.display = "none";
+    } else {
+        submenu.style.display = "block";
+    }
+});
+
+    </script>
+</body>
+</html>
+{% endblock %}
+    <!-- <center>
+        <h1> Will list accounts</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer Id</th>
+                    <th>Account No</th>
+                    <th>Name</th>
+                    <th>Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% load static %} {% for p in customer %}
+                <tr>
+                    <td>{{ p.id }}</td>
+                    <td>{{ p.accountno }}</td>
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.balance }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </center> -->

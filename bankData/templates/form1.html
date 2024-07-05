@@ -1,0 +1,107 @@
+<h1> Welcome to first file</h1>
+<style>
+    
+    /* Add border and spacing to the table */
+    
+    table {
+        /* width: 50%; */
+        /* Makes the table take the full width of the container */
+        border-collapse: collapse;
+        /* Ensures borders are not doubled */
+        margin-bottom: 20px;
+        /* Adds space below the table */
+    }
+    /* Add border to table, cells, and headings */
+    
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        /* Set the border style */
+    }
+    /* Style the table headers */
+    
+    th {
+        background-color: #f2f2f2;
+        /* Light gray background */
+        padding: 10px;
+        /* Padding around the text */
+    }
+    /* Style the table cells */
+    
+    td {
+        padding: 10px;
+        /* Padding around the text */
+    }
+    /* Alternate row colors for readability */
+    
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+        /* Light background for even rows */
+    }
+    /* Hover effect to highlight the row */
+    
+    tr:hover {
+        background-color: #e0e0e0;
+        /* Highlight the row on hover */
+    }
+
+  table {
+  counter-reset: section;
+}
+
+.count:before {
+  counter-increment: section;
+  content: counter(section);
+}
+</style>
+
+<center>
+    <a href="/listaccounts">List Account</a>
+    <a href="/withdraw">Withdraw</a>
+    <a href="/deposit">Deposit</a>
+    <a href="/delete">Delete Account</a>
+    <a href="/update">Update Account</a>
+    <form action="/logout" method="GET">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+
+    <center>
+        <h1> Will list accounts</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Serial no</th>
+                    <th>customer id</th>
+                    <th>Name</th>
+                    <th>email-id</th>
+                    <th>phone no</th>
+                    <th>Add Account</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in customer %}
+                <tr>
+                    <td class="count"></td>  <!--or add {{forloop.counter}}-->
+                    <td>{{ p.id }}</td>
+                    <td>{{ p.username }}</td>
+                    <td>{{ p.emailid }}</td>
+                    <td>{{ p.phoneNo }}</td>
+                    <td><a href="{% url 'addaccounts' user_id=p.id %}"><button type="button">Add account</button></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </center>
+        <!-- <h1>User Details</h1>
+        <a href="/viewprofile">View profle</a>
+        {% if user %}
+            <p>User Name: {{ user.username }}</p>
+            <p>Email: {{ user.emailid }}</p>
+            <p>Phone Number: {{ user.phoneNo }}</p>
+        {% else %}
+            <p>{{ error_message }}</p>
+        {% endif %} -->
+    
+</center>

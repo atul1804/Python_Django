@@ -1,0 +1,123 @@
+<style>
+ .main-content {
+    /* margin-top: 50px; */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: rgba(0, 123, 255, 0.5); /* Blurred blue background color */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for a card-like effect */
+        border-radius: 8px; /* Add some rounded corners */
+    }
+
+    /* Style for table headers */
+    table th {
+        padding: 16px;
+        text-align: center;
+        border-bottom: 1px solid #070606;
+        color: #0e0c0c;
+        /* border-right: 1px solid #070606; */
+        
+    }
+
+    /* Style for table cells */
+    table td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #0a0808;
+        /* border-right: 1px solid #070606; */
+    }
+
+    /* Style for alternating rows */
+    table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    /* Hover effect for table rows */
+  
+
+    /* Style for heading */
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+
+form {
+    margin-top: 20px;
+}
+
+
+
+
+   
+
+    /* Style for form container */
+    .form-container {
+        text-align: left;
+        margin-top: 20px;
+        font-weight: 600;
+    }
+
+    /* Style for main content */
+    .main-content {
+       height: 112%;
+        width: 97%;
+        /* padding: 20px; */
+        background-color: #f2f2f2;
+        /* border-radius: 10px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); /* Add shadow for a card-like effect */
+        position: absolute; 
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Style for heading */
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+</style>
+<div class="main-content" style="background-image: url('/static/bg-04.jpg'); background-size: cover; background-position: center; overflow: hidden;">
+    
+    <div class="form-container">
+        <form action="/create_fd">
+            <table>
+                <tr>
+                    <th colspan="7"><h1>Total FD</h1></th>
+                </tr>
+                <tr>
+                <th>Serial no.</th>
+                <th>FD Amount</th>
+                <th>Date</th>
+                <th>Time Period</th>
+                <th>Interest Rate</th>
+                <th>Maturity Amount</th>
+                <th>Maturity Date</th>
+            </tr>
+            {% load static %} {% for f in u %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{f.fd_amount}}</td>
+                <td>{{f.date}}</td>
+                 <td>{{f.time_period}}</td>
+                 <td>{{f.int_rate}}</td>
+                 <td>{{f.mat_amount}}</td>
+                 <td>{{f.maturity_date}}</td>
+                      <!-- {{trans.t_type}}  -->
+            </tr>
+            {% endfor %}
+            </table>
+            </form>
+</div>

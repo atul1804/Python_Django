@@ -1,0 +1,83 @@
+
+
+    <html>
+        <style>
+    .main-content {
+margin-top: -50px;
+padding: 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+table {
+    margin-top: 20px;
+        width: 70%;
+        border-collapse: collapse;
+        background-color: rgba(0, 123, 255, 0.5); /* Blurred blue background color */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for a card-like effect */
+        border-radius: 8px; /* Add some rounded corners */
+    }
+
+    /* Style for table headers */
+    table th {
+        padding: 16px;
+        text-align: center;
+        border-bottom: 1px solid #070606;
+        color: #0e0c0c;
+        font-size: 20px;
+        /* border-right: 1px solid #070606; */
+        
+    }
+
+    /* Style for table cells */
+    table td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #0a0808;
+        font-size: 20px;
+        /* border-right: 1px solid #070606; */
+    }
+
+    /* Style for alternating rows */
+    table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+.main-content {
+       height: 118%;
+       width: 97%;
+       padding: 20px;
+       background-color: #f2f2f2;
+       border-radius: 10px;
+       box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); /* Add shadow for a card-like effect */
+       position: absolute;
+       top: 45%;
+       left: 50%;
+       transform: translate(-50%, -50%);
+   }
+   h1 {
+        text-align: center;
+        color: #333;
+        font-size: 40px;
+        margin-bottom: 40px;
+    }
+form {
+margin-top: 20px;
+}
+</style>
+<div class="main-content" style="background-image: url('/static/bg-04.jpg'); background-size: cover; background-position: center; overflow: hidden;">
+    <div><h1>Savings Account</h1></div>
+        <table>
+            <tr>
+                <th>Account Number:</th>
+                <td>{{u.accountno}}</td>
+            </tr>
+            <tr>
+                <th>Balance</th>
+                <td>{{u.balance}}</td>
+            </tr>
+        </table>
+    </div>
+</html>

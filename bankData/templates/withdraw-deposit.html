@@ -1,0 +1,280 @@
+{% block body %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <style>
+        body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #343a40;
+    color: #fff;
+    padding-top: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px 20px;
+    border-bottom: 1px solid #4f5963;
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #4f5963;
+}
+
+.submenu {
+    display: none;
+    padding-left: 20px;
+}
+
+.submenu li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+}
+
+.submenu li a:hover {
+    background-color: #555;
+}
+
+.main-content {
+    margin-left: 40px;
+    padding: 20px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 70%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+
+form {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-group input[type="text"], .form-group input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.btn-primary {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+ /* Style for input fields */
+ input{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      input[type="text"] {
+        padding: 12px;
+        border: 2px solid #ccc;
+        border-radius: 6px;
+        margin: 8px 0;
+        width: 400px;
+        box-sizing: border-box;
+        font-size: 16px;
+        transition: border-color 0.3s; /* Smooth transition for border color */
+    }
+
+    /* Hover effect for input fields */
+    input[type="text"]:hover {
+        border-color: #66afe9; /* Change border color on hover */
+    }
+
+    /* Style for submit button */
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s; /* Smooth transition for background color */
+        display: block; /* Make the button a block-level element */
+        margin: 0 auto; /* Center the button horizontally */
+    }
+
+    /* Hover effect for submit button */
+    input[type="submit"]:hover {
+        background-color: #45a049; /* Darker shade of green on hover */
+    }
+
+    /* Style for form container */
+    .form-container {
+        text-align: left;
+        margin-top: 20px;
+        font-weight: 600;
+    }
+
+    /* Style for main content */
+    .main-content {
+       
+        width: 50%;
+        padding: 20px;
+        background-color: #f2f2f2;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); /* Add shadow for a card-like effect */
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Style for heading */
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <ul>
+            <li><a href="/admin_panel">Dashboard</a></li>
+            <li><a href="/listaccounts">Accounts List</a></li>
+            <li class="has-submenu" id="submenu-trigger"><a href="#">Withdraw/Deposit</a>
+                <ul class="submenu">
+                    <li><a href="/withdraw">Withdraw</a></li>
+                    <li><a href="/deposit">Deposit</a></li>
+                </ul>
+            </li>
+            <li><a href="/delete">Delete Account</a></li>
+            <li><a href="/update">Update Account</a></li>
+            <li style="align-items: center;">
+                <form action="/logout" method="GET">
+                    {% csrf_token %}
+                    <button type="submit" style="padding: 10px 10px; width: 80px;">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <h1>Money Withdraw</h1>
+
+        <div class="form-container">
+            <form action="/myWithdraw/">
+                {% csrf_token %}
+                <label for="t1">Account No</label>
+                <input type="text" name="t1" id="t1" placeholder="Enter account number">
+    
+                <label for="t2">Deposit</label>
+                <input type="text" name="t2" id="t2" placeholder="Enter deposit amount">
+                
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+         <!-- <center>
+<form action="/myWithdraw/" >
+{% csrf_token %}
+Account No <input type="text" name="t1" id="t1" />
+Withdraw <input type="text" name="t2" id="t2" />
+<input type="submit">
+</form>
+
+</center> -->
+
+       
+    </div>
+    
+    <script>
+    
+
+    document.getElementById("submenu-trigger").addEventListener("click", function() {
+    var submenu = this.querySelector(".submenu");
+    if (submenu.style.display === "block") {
+        submenu.style.display = "none";
+    } else {
+        submenu.style.display = "block";
+    }
+});
+
+    </script>
+</body>
+</html>
+
+
+<!-- <center>
+<form action="/myWithdraw/" >
+{% csrf_token %}
+Account No <input type="text" name="t1" id="t1" />
+Withdraw <input type="text" name="t2" id="t2" />
+<input type="submit">
+</form>
+
+</center> -->
+
+{% endblock %}

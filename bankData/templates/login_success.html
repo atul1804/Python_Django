@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    {% block body %}   
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <style>
+        body {
+    margin: 0;
+    /* font-family: Arial, sans-serif; */
+    background-color: #f4f4f4;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #343a40;
+    color: #fff;
+    padding-top: 20px;
+    z-index: 1;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px 20px;
+    border-bottom: 1px solid #4f5963;
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #4f5963;
+}
+
+.submenu {
+    display: none;
+    padding-left: 20px;
+}
+
+.submenu li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+}
+
+.submenu li a:hover {
+    background-color: #555;
+}
+
+.main-content {
+    /* margin-left: 150px; */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.main-content {
+       height: 113%;
+        width: 97%;
+        /* padding: 20px; */
+        background-color: #f2f2f2;
+        /* border-radius: 10px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); /* Add shadow for a card-like effect */
+        position: absolute; 
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+.heading h1 {
+    margin-top: 30px;
+    text-align: left;
+    font-size: 40px;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+table {
+    margin-top: 50px;
+    margin-left: 100px;
+        width: 70%;
+        border-collapse: collapse;
+        background-color: rgba(0, 123, 255, 0.5); /* Blurred blue background color */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for a card-like effect */
+        border-radius: 8px; /* Add some rounded corners */
+    }
+
+table th {
+        padding: 16px;
+        text-align: center;
+        border-bottom: 1px solid #070606;
+        color: #0e0c0c;
+        border-right: 1px solid #070606;
+        font-size: 20px;
+        
+    }
+
+    /* Style for table cells */
+    table td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #0a0808;
+        /* border-right: 1px solid #070606; */
+        font-size: 20px;
+    }
+
+    /* Style for alternating rows */
+    table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+   /* .one{
+    position: relative;
+    top: 0;
+   } */
+
+</style>
+</head>
+<body>
+    <div class="sidebar">
+        <ul>
+            <li><a href="/userhome">Home</a></li>
+            <li><a href="/editprofile/">Edit Profile</a></li>
+            
+            <li><a href="/transaction/">Transactions</a></li>
+            <li class="has-submenu" id="submenu-trigger"><a href="#">Deposits</a>
+                <ul class="submenu">
+                    <li><a href="/userDeposits/">Account Balance</a></li>
+                    <li><a href="/create_fd/">Create Fd</a></li>
+                    <li><a href="/show_fd/">Show Fd</a></li>
+                </ul>
+            </li>
+            <li style="align-items: center;">
+                <form action="/logout" method="GET">
+                    {% csrf_token %}
+                    <button type="submit" style="padding: 10px 10px; width: 80px;">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+    
+     <div class="main-content" style="background-image: url('/static/bg-04.jpg'); background-size: cover; background-position: center; overflow: hidden;">
+    
+    <div class="heading"><h1>Welcome {{user.username}}</h1></div> 
+    {% csrf_token %}
+    
+    <table>
+        <tr>
+            <th>User Name:</th>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <th>Email: </th>
+            <td>{{ user.emailid }}</td>
+        </tr>
+        <tr>
+            <th>Phone Number:</th>
+            <td>{{ user.phoneNo }}</td>
+        </tr>
+        <tr>
+            <th>Account No:</th>
+            <td>{{ user1.accountno }}</td>
+        </tr>
+        <tr>
+            <th>Balance:</th>
+            <td>{{ user1.balance }}</td>
+        </tr>
+    </table>
+    
+    <script>
+        document.getElementById("submenu-trigger").addEventListener("click", function() {
+      var submenu = this.querySelector(".submenu");
+      if (submenu.style.display === "block") {
+          submenu.style.display = "none";
+      } else {
+          submenu.style.display = "block";
+      }
+  });
+  </script>
+</body>
+{% endblock %}
+</html>

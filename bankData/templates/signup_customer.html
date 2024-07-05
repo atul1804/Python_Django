@@ -1,0 +1,42 @@
+{% block body %}
+
+<center>
+    <h1 style="font-size: 50px;">Welcome to Sarkari bank</h1>
+</center>
+<table border=2 style="border-collapse: collapse; font-size: 20px; " align="center">
+    <form action="/storedetails_cust_sign/">
+        {% csrf_token %}
+    <tr>
+        <th>Username</th>
+        <td><input type="text" id="t1" name="t1"></td>
+    </tr>
+    <tr>
+        <th>Phone number</th>
+        <td><input type="number" id="t2" name="t2"></td>
+    </tr>
+    <tr>
+        <th>Email-Id</th>
+        <td><input type="email" id="t3" name="t3"></td>
+    </tr>
+    <tr>
+        <th>Password</th>
+        <td><input type="password" id="t4" name="t4"></td>
+    </tr>
+    <tr>
+        <th>Confirm password</th>
+        <td><input type="password" id="t5" name="t5"></td>
+    </tr>
+    <tr>
+        <td colspan=2 align="center"><input type="submit" value="Signup"></td>
+    </tr>
+    <tr>
+        <td colspan=2 align="center">already have an account?<button type="submit"><a  href="/login_cust/">Login</a></button></td>
+            
+        <!-- <td colspan=2 align="center">already have an account?<button onclick="window.locationhref='login_customer.html'">Login</button></td> -->
+    </tr>
+</form>
+<!-- <form action="/login_cust/">
+
+</form> -->
+</table>
+{% endblock %}

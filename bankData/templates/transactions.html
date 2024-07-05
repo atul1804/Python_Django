@@ -1,0 +1,343 @@
+
+
+<!-- <h1>Welcome {{user.username}}</h1>
+
+<a href="">Home</a>
+<a href="/viewprofile">View profle</a>
+<a href="/editprofile">Edit profile</a>
+<a href="/transaction">Transactions</a>
+<a href="/Deposits">Deposits</a>
+<a href="/create_fd">Create FD</a>
+<a href="/show_fd">Show FD</a>
+<form action="/logout" method="GET">
+    {% csrf_token %}
+<button type="submit">Logout</button>
+</form> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    {% block body %}   
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <style>
+        body {
+    margin: 0;
+    /* font-family: Arial, sans-serif; */
+    background-color: #f4f4f4;
+    
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #343a40;
+    color: #fff;
+    padding-top: 20px;
+    z-index: 1;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px 20px;
+    border-bottom: 1px solid #4f5963;
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #4f5963;
+}
+
+.submenu {
+    display: none;
+    padding-left: 20px;
+}
+
+.submenu li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+}
+
+.submenu li a:hover {
+    background-color: #555;
+}
+
+/* .main-content {
+    margin-left: 250px;
+    padding: 20px;
+       
+       
+
+} */
+.main-content h1{
+    margin-left: 50px;
+    color: #333;
+    font-size: 40px;
+}
+.main-content {
+    margin-left: 200px;
+    padding: 20px; 
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+    
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+        width: 80%;
+        border-collapse: collapse;
+        background-color: rgba(0, 123, 255, 0.5); /* Blurred blue background color */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for a card-like effect */
+        border-radius: 8px; /* Add some rounded corners */
+    }
+
+    /* Style for table headers */
+    table th {
+        padding: 16px;
+        text-align: center;
+        border-bottom: 1px solid #070606;
+        color: #0e0c0c;
+        /* border-right: 1px solid #070606; */
+        
+    }
+
+    /* Style for table cells */
+    table td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #0a0808;
+        /* border-right: 1px solid #070606; */
+    }
+
+    /* Style for alternating rows */
+    table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+
+form {
+    
+    margin-top: 20px;
+}
+
+input{
+   
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      input[type="text"] {
+        padding: 12px;
+        border: 2px solid #ccc;
+        border-radius: 6px;
+        margin: 8px 0;
+        width: 400px;
+        box-sizing: border-box;
+        font-size: 16px;
+        transition: border-color 0.3s; /* Smooth transition for border color */
+    }
+
+    /* Hover effect for input fields */
+    input[type="text"]:hover {
+        border-color: #66afe9; /* Change border color on hover */
+    }
+    input[type="email"] {
+        padding: 12px;
+        border: 2px solid #ccc;
+        border-radius: 6px;
+        margin: 8px 0;
+        width: 400px;
+        box-sizing: border-box;
+        font-size: 16px;
+        transition: border-color 0.3s; /* Smooth transition for border color */
+    }
+
+    /* Hover effect for input fields */
+    input[type="email"]:hover {
+        border-color: #66afe9; /* Change border color on hover */
+    }
+
+    /* Style for submit button */
+    input[type="submit"]  {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s; /* Smooth transition for background color */
+        display: block; /* Make the button a block-level element */
+        margin: 0 auto; /* Center the button horizontally */
+        width: 200px;
+    }
+
+    /* Hover effect for submit button */
+    input[type="submit"]:hover {
+        background-color: #45a049; /* Darker shade of green on hover */
+        
+    }
+
+    /* Style for form container */
+    .form-container {
+        text-align: left;
+        /* margin-top: 20px; */
+        font-weight: 600;
+    }
+    .table1{
+        margin-bottom: 10px;
+        margin-left: 50px;
+    }
+    .table2{
+        margin-bottom: 10px;
+        margin-left: 50px;
+    }
+    .table3{
+        margin-bottom: 10px;
+        margin-left: 50px;
+    }
+    
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <ul>
+            <li><a href="/userhome">Home</a></li>
+            <li><a href="/editprofile/">Edit Profile</a></li>
+            
+            <li><a href="/transaction/">Transactions</a></li>
+            <li class="has-submenu" id="submenu-trigger"><a href="#">Deposits</a>
+                <ul class="submenu">
+                    <li><a href="/userDeposits/">Account Balance</a></li>
+                    <li><a href="/create_fd/">Create Fd</a></li>
+                    <li><a href="/show_fd/">Show Fd</a></li>
+                </ul>
+            </li>
+            <!-- <li><a href="/Deposits/">Deposits</a></li> -->
+            <li style="align-items: center;">
+                <form action="/logout" method="GET">
+                    {% csrf_token %}
+                    <button type="submit" style="padding: 10px 10px; width: 80px;">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+    
+     <div class="main-content" style="background-image: url('/static/bg-04.jpg'); background-size: cover; background-position: center; overflow: hidden; background-repeat: repeat;">
+    <!-- <div><h1>Welcome {{user.username}}</h1></div>  -->
+    {% csrf_token %}
+    <h1>Transactions</h1>
+    <div class="form-container">
+    <form action="/transaction/">
+        <div class="table1">
+        <table>
+            <tr>
+                <th>Account Number:</th>
+                <td>{{user.accountno}}</td>
+            </tr>
+            <tr>
+                <th>Person Name:</th>
+                <td>{{user.name}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="table2">
+        <table>
+            <tr>
+                <th colspan="6"><h1>Total Transactions</h1></th>
+            </tr>
+            <tr>
+            <th>Serial no.</th>
+            <th>Account No</th>
+            <th>Date</th>
+            <th>Withdraw<br>&#8377; db</th>
+            <th>Deposit<br>&#8377; cr</th>
+            <th>Balance</th>
+        </tr>
+        {% load static %} {% for trans in t %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{trans.AccountNo}}</td>
+            <td>{{trans.date}}</td>
+             <td>{% if trans.t_type == "Debit" %}
+                <span class="currency-symbol">&#8377; </span>{{trans.amount}}
+                {% endif %} 
+             </td>
+             <td>{% if trans.t_type == "Credit" %}
+                <span class="currency-symbol2">&#8377; </span>{{trans.amount}}
+                {% endif %} 
+             </td>
+             <td>&#8377; {{trans.balance}}</td>
+                  <!-- {{trans.t_type}}  -->
+        </tr>
+        {% endfor %}
+        </table>
+        </div>
+        <div class="table3">
+        <table>
+            <tr>
+                <th colspan="2"><h1>Account Summary</h1></th>
+            </tr>
+            <tr>
+                <th>Total Credit</th>
+                <td><span class="currency-symbol2">&#8377; </span>{{ total_credit_amount }}</td>
+            </tr>
+            <tr>
+                <th>Total Debit</th>
+                <td><span class="currency-symbol">&#8377; </span>{{ total_debit_amount }}</td>
+            </tr>
+            <tr>
+                <th>Balance</th>
+                <td>&#8377; {{user.balance}}</td>
+            </tr>
+        </table>
+    </div>
+    </form>
+</div>
+</div>
+<script>
+      document.getElementById("submenu-trigger").addEventListener("click", function() {
+    var submenu = this.querySelector(".submenu");
+    if (submenu.style.display === "block") {
+        submenu.style.display = "none";
+    } else {
+        submenu.style.display = "block";
+    }
+});
+</script>
+   
+</body>
+{% endblock %}
+</html>
+
+
+
