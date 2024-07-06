@@ -17,11 +17,8 @@ This project is a comprehensive banking system built using Django, designed to m
 - **Transaction History:** Customers can see a history of their transactions.
 - **Create Fixed Deposit (FD):** Customers can create their own FD accounts.
 - **Withdraw Money:** Customers can withdraw money from their accounts.
-
-## Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/django-banking-system.git
-   cd django-banking-system
-
+  
+### Technologies Used
+- **Django: Web Framework
+- **SQLite: Database
+- **HTML/CSS: Frontend
