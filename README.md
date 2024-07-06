@@ -19,6 +19,6 @@ This project is a comprehensive banking system built using Django, designed to m
 - **Withdraw Money:** Customers can withdraw money from their accounts.
   
 ### Technologies Used
-- **Django: Web Framework
-- **SQLite: Database
-- **HTML/CSS: Frontend
+- **Django:** Web Framework
+- **SQLite:** Database
+- **HTML/CSS:** Frontend
